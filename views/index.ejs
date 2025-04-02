@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Home Page</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+</head>
+
+<body>
+
+    <nav class="nav justify-content-center  ">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link active" href="/addblog" aria-current="page">Add blog</a>
+
+    </nav>
+
+
+    <h1>Home Page</h1>
+
+    <div class="container-fluid">
+        <div class="album py-5 bg-body-tertiary">
+            <div class="container">
+                <div class="row justify-content-center g-3 mt-4">
+                    <% blogs.forEach((blog)=> { %>
+                        <div class="col-md-4 d-flex justify-content-center">
+                            <div class="card shadow-sm" style="width: 300px;">
+                                <img src="<%= blog.thumbnail %>" alt="<%= blog.title %>"
+                                    style="width: 100%; height: 200px;">
+                                <div class="card-body">
+                                    <h4 class="card-text">
+                                        <%= blog.title %>
+                                    </h4>
+                                    <h4 class="card-text">
+                                        <%= blog.author %>
+                                    </h4>
+                                    <p class="card-text">
+                                        <%= blog.description %>
+                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <a href="/viewblog/<%= blog.id %>"
+                                                class="btn btn-sm btn-outline-secondary">View</a>
+                                            <a href="/editblog/<%= blog.id %>"
+                                                class="btn btn-sm btn-outline-warning">Edit</a>
+                                            <a href="/deleteblog/<%= blog.id %>"
+                                                class="btn btn-sm btn-outline-danger">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

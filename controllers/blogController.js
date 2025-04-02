@@ -9,12 +9,12 @@ module.exports.loginPage = (req, res) => {
 module.exports.login = async (req, res) => {
     try {
         let user = await userModel.findOne({ username: req.body.username });
-        if (user && user.username === username) {
+        if (user && user.username === req.body.username) {
             return res.json({ message: "user login Successfully" });
         }
     } catch (error) {
-        console.log
-        return res.json({message:error.message});
+        console.log(error);
+        return res.json({ message: error.message });
     }
 }
 
@@ -78,13 +78,12 @@ module.exports.signUp = async (req, res) => {
     try {
         let { username, password, email, confirmpassword } = req.body;
 
-        if (password === confirmpassword) {
-            return res.redirect('/login');
+        if (password !== confirmpassword) {
+            return res.json({ message: "Passwords do not match" });
         }
+        let user = await userModel.create({ username, password, email });
+        return res.redirect('/login');
 
-        let user = await userModel.create({ username, password });
-
-        return res.redirect('/signup');
 
     } catch (error) {
         return res.redirect('/signup');
@@ -103,8 +102,10 @@ module.exports.editPage = async (req, res) => {
 module.exports.editblog = async (req, res) => {
     try {
         let { id } = req.params;
-        let updateData = { ...req.body };
-
+        let update = { ...req.body };
+        if (req.file) {
+            update.thumbnail = req.file.path;
+        }
         if (req.file) {
             let blog = await blogModel.findById(id);
             if (blog.thumbnail) {

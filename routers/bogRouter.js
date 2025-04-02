@@ -17,6 +17,6 @@ blogRouter.post("/addblog",upload,blogController.addblogPage);
 blogRouter.get("/viewblog/:id",blogController.viewPage);
 blogRouter.get("/deleteblog/:id",blogController.deletePage);
 blogRouter.get("/editblog/:id",blogController.editPage);
-blogRouter.post("/upadate/:id",blogController.editblog);
+blogRouter.post("/update/:id",blogController.editblog);
 
 module.exports=blogRouter;

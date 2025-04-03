@@ -8,7 +8,7 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use('/uploads',express.static(__dirname + '/uploads'));
-
+app.use(express.json());
 
 app.use('/',require('./routers/index'));
 

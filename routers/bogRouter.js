@@ -12,11 +12,11 @@ blogRouter.get('/signup',blogController.signupPage);
 blogRouter.post('/signup',blogController.signUp);
 
 blogRouter.get("/",blogController.homePage);
-blogRouter.get("/addblog",blogController.addblog);
-blogRouter.post("/addblog",upload,blogController.addblogPage);
-blogRouter.get("/viewblog/:id",blogController.viewPage);
-blogRouter.get("/deleteblog/:id",blogController.deletePage);
-blogRouter.get("/editblog/:id",blogController.editPage);
-blogRouter.post("/update/:id",blogController.editblog);
+// blogRouter.get("/addblog",blogController.addblog);
+// blogRouter.post("/addblog",upload,blogController.addblogPage);
+// blogRouter.get("/viewblog/:id",blogController.viewPage);
+// blogRouter.get("/deleteblog/:id",blogController.deletePage);
+// blogRouter.get("/editblog/:id",blogController.editPage);
+// blogRouter.post("/update/:id",blogController.editblog);
 
 module.exports=blogRouter;

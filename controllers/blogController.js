@@ -1,4 +1,4 @@
-const blogModel = require("../models/blogMOdel");
+const blogModel = require('../models/blogModel');
 const userModel = require("../models/userModel");
 const fs = require('fs');
 
@@ -9,14 +9,18 @@ module.exports.loginPage = (req, res) => {
 module.exports.login = async (req, res) => {
     try {
         let user = await userModel.findOne({ username: req.body.username });
-        if (user && user.username === req.body.username) {
-            return res.json({ message: "user login Successfully" });
+
+        if (user && user.password === req.body.password) {
+            return res.redirect('/');
+        } else {
+            return res.redirect('/login');
         }
     } catch (error) {
         console.log(error);
         return res.json({ message: error.message });
     }
 }
+
 
 module.exports.signupPage = (req, res) => {
     return res.render('pages/signup');
@@ -76,19 +80,24 @@ module.exports.addblogPage = async (req, res) => {
 
 module.exports.signUp = async (req, res) => {
     try {
-        let { username, password, email, confirmpassword } = req.body;
+        let { username, password, email, confirm_password } = req.body;
 
-        if (password !== confirmpassword) {
-            return res.json({ message: "Passwords do not match" });
+        if (password !== confirm_password) {
+            return res.render('pages/signup', { message: "Passwords do not match" });
         }
+
         let user = await userModel.create({ username, password, email });
+
+        console.log('User created successfully');
+
         return res.redirect('/login');
 
-
     } catch (error) {
-        return res.redirect('/signup');
+        console.log(error.message);
+        return res.render('pages/signup', { message: "Error creating user" });
     }
-}
+};
+
 
 module.exports.editPage = async (req, res) => {
     try {
